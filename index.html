@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Skibb Holdings</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="description" content="Skibb Holdings is a real estate platform focused on building and operating housing in supply-constrained Southern California markets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap">
+<style>
+  /* Layout: one quiet screen. Date/time bar on top, the extruded "skibb" mark at center,
+     contact beneath, and the Lough Hyne drawing washed into the paper along the bottom. */
+  :root {
+    --paper: #F3F2EE;          /* Singer Dolan's ground */
+    --green: #004225;          /* British racing green */
+    --green-muted: rgba(0, 66, 37, 0.62);
+    --green-faint: rgba(0, 66, 37, 0.38);
+    --rule: rgba(0, 66, 37, 0.22);
+    --f-ui: "Jost", "Futura", "Avenir Next", "Century Gothic", system-ui, sans-serif;
+    color-scheme: light;
+  }
+  [hidden] { display: none !important; }
+  html, body { height: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--green);
+    font-family: var(--f-ui);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .landscape {
+    position: fixed;
+    left: -6vw; right: -6vw; bottom: 0;
+    height: clamp(240px, 38vw, 52vh);
+    background: url("lough-hyne.webp") center 70% / cover no-repeat;
+    opacity: 0.62;
+    filter: saturate(0.68);
+    mix-blend-mode: multiply;
+    -webkit-mask-image: radial-gradient(ellipse 70% 100% at 50% 100%, #000 0%, #000 34%, rgba(0,0,0,.7) 56%, rgba(0,0,0,.25) 74%, transparent 90%);
+    mask-image: radial-gradient(ellipse 70% 100% at 50% 100%, #000 0%, #000 34%, rgba(0,0,0,.7) 56%, rgba(0,0,0,.25) 74%, transparent 90%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    min-height: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 22px;
+  }
+  @media (min-width: 720px) {
+    .page { padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); padding-block: 28px; }
+  }
+
+  .bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding-block: 32px 24vh;
+    text-align: center;
+  }
+
+  .mark {
+    margin: 0;
+    width: min(340px, 68vw);
+    max-width: 100%;
+  }
+  .mark svg { display: block; width: 100%; height: auto; }
+
+  .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+  }
+  .statement {
+    margin: 0;
+    max-width: 46ch;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.85;
+    letter-spacing: 0.03em;
+    color: var(--green-muted);
+    text-wrap: balance;
+    text-shadow: 0 0 8px var(--paper), 0 0 16px var(--paper);
+  }
+  .inquiries {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 6px 14px;
+  }
+  .inquiries span {
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--green-faint);
+    text-shadow: 0 0 8px var(--paper), 0 0 16px var(--paper);
+  }
+  .email {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--green);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color .2s;
+    text-shadow: 0 0 8px var(--paper), 0 0 16px var(--paper);
+  }
+  .email:hover, .email:focus-visible { border-bottom-color: var(--green-faint); outline: none; }
+  .rule { width: 36px; height: 1px; background: var(--rule); }
+
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-muted);
+    text-shadow: 0 0 6px var(--paper), 0 0 12px var(--paper);
+  }
+
+  @media (max-width: 480px) {
+    .bar { font-size: 10px; letter-spacing: 0.14em; }
+    .stage { gap: 22px; padding-block: 24px 16vh; }
+    .landscape { left: -20vw; right: -20vw; height: 46vh; background-position: 58% 70%; opacity: 0.66; }
+  }
+</style>
+
+</head>
+<body>
+<div class="landscape" aria-hidden="true"></div>
+
+<div class="page">
+
+  <main class="stage">
+    <h1 class="mark">
+      <svg viewBox="-54.674 11.228 109.816 82.518" role="img" aria-label="Skibb Holdings">
+        <title>Skibb Holdings</title>
+        <path fill="#043D2A" d="M-48.048 39.468L-48.048 39.468L-51.176 41.584Q-50.118 43.700-48.439 45.563Q-46.760 47.426-44.529 48.553Q-42.298 49.680-39.676 49.680L-39.676 49.680Q-37.744 49.680-35.973 49.036Q-34.202 48.392-32.799 47.196Q-31.396 46.000-30.591 44.298Q-29.786 42.596-29.786 40.480L-29.786 40.480Q-29.786 38.272-30.568 36.685Q-31.350 35.098-32.569 33.971Q-33.788 32.844-35.214 32.108Q-36.640 31.372-37.928 30.912L-37.928 30.912Q-40.734 29.946-42.367 28.957Q-44.000 27.968-44.690 26.841Q-45.380 25.714-45.380 24.380L-45.380 24.380Q-45.380 22.816-44.184 21.551Q-42.988 20.286-40.366 20.286L-40.366 20.286Q-38.480 20.286-37.169 21.022Q-35.858 21.758-34.938 22.908Q-34.018 24.058-33.420 25.254L-33.420 25.254L-30.062 23.322Q-30.844 21.620-32.224 20.079Q-33.604 18.538-35.559 17.549Q-37.514 16.560-40.136 16.560L-40.136 16.560Q-42.850 16.560-44.966 17.641Q-47.082 18.722-48.278 20.608Q-49.474 22.494-49.474 24.886L-49.474 24.886Q-49.474 27.094-48.623 28.612Q-47.772 30.130-46.438 31.165Q-45.104 32.200-43.632 32.867Q-42.160 33.534-40.964 33.948L-40.964 33.948Q-39.124 34.592-37.491 35.397Q-35.858 36.202-34.846 37.490Q-33.834 38.778-33.834 40.940L-33.834 40.940Q-33.834 43.148-35.398 44.574Q-36.962 46.000-39.538 46.000L-39.538 46.000Q-41.470 46.000-42.988 45.172Q-44.506 44.344-45.725 42.872Q-46.944 41.400-48.048 39.468ZM-21.816 13.340L-25.496 13.340L-25.496 49.220L-21.816 49.220L-21.816 38.502L-13.076 49.220L-8.476 49.220L-18.596 36.800L-9.396 28.060L-13.996 28.060L-21.816 35.466L-21.816 13.340ZM-6.026 19.320L-6.026 19.320Q-6.026 20.332-5.267 21.091Q-4.508 21.850-3.496 21.850L-3.496 21.850Q-2.438 21.850-1.702 21.091Q-0.966 20.332-0.966 19.320L-0.966 19.320Q-0.966 18.262-1.702 17.526Q-2.438 16.790-3.496 16.790L-3.496 16.790Q-4.508 16.790-5.267 17.526Q-6.026 18.262-6.026 19.320ZM-1.656 28.060L-5.336 28.060L-5.336 49.220L-1.656 49.220L-1.656 28.060ZM8.384 31.694L8.384 13.340L4.704 13.340L4.704 49.220L8.384 49.220L8.384 45.540Q9.396 47.288 11.006 48.346L11.006 48.346Q12.984 49.680 15.606 49.680L15.606 49.680Q18.504 49.680 20.873 48.346Q23.242 47.012 24.668 44.528Q26.094 42.044 26.094 38.640L26.094 38.640Q26.094 35.190 24.668 32.729Q23.242 30.268 20.873 28.934Q18.504 27.600 15.606 27.600L15.606 27.600Q12.984 27.600 11.006 28.934L11.006 28.934Q9.396 29.992 8.384 31.694L8.384 31.694ZM22.368 38.640L22.368 38.640Q22.368 41.078 21.379 42.780Q20.390 44.482 18.757 45.356Q17.124 46.230 15.146 46.230L15.146 46.230Q13.536 46.230 11.972 45.356Q10.408 44.482 9.396 42.780Q8.384 41.078 8.384 38.640Q8.384 36.202 9.396 34.500Q10.408 32.798 11.972 31.924Q13.536 31.050 15.146 31.050L15.146 31.050Q17.124 31.050 18.757 31.924Q20.390 32.798 21.379 34.500Q22.368 36.202 22.368 38.640ZM33.604 31.694L33.604 13.340L29.924 13.340L29.924 49.220L33.604 49.220L33.604 45.540Q34.616 47.288 36.226 48.346L36.226 48.346Q38.204 49.680 40.826 49.680L40.826 49.680Q43.724 49.680 46.093 48.346Q48.462 47.012 49.888 44.528Q51.314 42.044 51.314 38.640L51.314 38.640Q51.314 35.190 49.888 32.729Q48.462 30.268 46.093 28.934Q43.724 27.600 40.826 27.600L40.826 27.600Q38.204 27.600 36.226 28.934L36.226 28.934Q34.616 29.992 33.604 31.694L33.604 31.694ZM47.588 38.640L47.588 38.640Q47.588 41.078 46.599 42.780Q45.610 44.482 43.977 45.356Q42.344 46.230 40.366 46.230L40.366 46.230Q38.756 46.230 37.192 45.356Q35.628 44.482 34.616 42.780Q33.604 41.078 33.604 38.640Q33.604 36.202 34.616 34.500Q35.628 32.798 37.192 31.924Q38.756 31.050 40.366 31.050L40.366 31.050Q42.344 31.050 43.977 31.924Q45.610 32.798 46.599 34.500Q47.588 36.202 47.588 38.640Z"></path>
+        <path fill="#5A7A6A" d="M-46.322 82.910L-46.994 82.910L-46.994 86.426L-51.902 86.426L-51.902 82.910L-52.562 82.910L-52.562 91.310L-51.902 91.310L-51.902 87.050L-46.994 87.050L-46.994 91.310L-46.322 91.310L-46.322 82.910ZM-37.090 87.110L-37.090 87.110Q-37.090 86.054-36.640 85.232Q-36.190 84.410-35.404 83.936Q-34.618 83.462-33.610 83.462L-33.610 83.462Q-32.602 83.462-31.816 83.936Q-31.030 84.410-30.586 85.232Q-30.142 86.054-30.142 87.110L-30.142 87.110Q-30.142 88.154-30.586 88.982Q-31.030 89.810-31.816 90.284Q-32.602 90.758-33.610 90.758L-33.610 90.758Q-34.618 90.758-35.404 90.284Q-36.190 89.810-36.640 88.982Q-37.090 88.154-37.090 87.110ZM-37.786 87.110L-37.786 87.110Q-37.786 88.034-37.474 88.820Q-37.162 89.606-36.598 90.188Q-36.034 90.770-35.272 91.094Q-34.510 91.418-33.610 91.418L-33.610 91.418Q-32.710 91.418-31.948 91.094Q-31.186 90.770-30.622 90.188Q-30.058 89.606-29.746 88.820Q-29.434 88.034-29.434 87.110L-29.434 87.110Q-29.434 86.186-29.746 85.400Q-30.058 84.614-30.622 84.032Q-31.186 83.450-31.948 83.126Q-32.710 82.802-33.610 82.802L-33.610 82.802Q-34.510 82.802-35.272 83.126Q-36.034 83.450-36.598 84.032Q-37.162 84.614-37.474 85.400Q-37.786 86.186-37.786 87.110ZM-20.238 82.910L-20.898 82.910L-20.898 91.310L-16.770 91.310L-16.770 90.686L-20.238 90.686L-20.238 82.910ZM-6.314 82.910L-8.594 82.910L-8.594 91.310L-6.314 91.310Q-5.090 91.310-4.160 90.782Q-3.230 90.254-2.708 89.312Q-2.186 88.370-2.186 87.110Q-2.186 85.850-2.708 84.908Q-3.230 83.966-4.160 83.438Q-5.090 82.910-6.314 82.910L-6.314 82.910ZM-6.314 90.650L-7.934 90.650L-7.934 83.570L-6.314 83.570Q-5.534 83.570-4.892 83.822Q-4.250 84.074-3.794 84.536Q-3.338 84.998-3.092 85.652Q-2.846 86.306-2.846 87.110Q-2.846 87.914-3.092 88.568Q-3.338 89.222-3.794 89.684Q-4.250 90.146-4.892 90.398Q-5.534 90.650-6.314 90.650L-6.314 90.650ZM6.986 82.910L6.326 82.910L6.326 91.310L6.986 91.310L6.986 82.910ZM23.022 82.910L22.362 82.910L22.362 89.942L15.978 82.586L15.978 91.310L16.638 91.310L16.638 84.302L23.022 91.634L23.022 82.910ZM35.962 87.122L35.962 87.746L38.974 87.746Q38.914 88.358 38.662 88.898Q38.410 89.438 37.996 89.858Q37.582 90.278 37.018 90.518Q36.454 90.758 35.746 90.758L35.746 90.758Q34.750 90.758 33.964 90.290Q33.178 89.822 32.716 89Q32.254 88.178 32.254 87.110L32.254 87.110Q32.254 86.030 32.716 85.214Q33.178 84.398 33.970 83.930Q34.762 83.462 35.746 83.462L35.746 83.462Q36.766 83.462 37.522 83.894Q38.278 84.326 38.698 85.022L38.698 85.022L39.178 84.602Q38.818 84.038 38.314 83.636Q37.810 83.234 37.168 83.018Q36.526 82.802 35.746 82.802L35.746 82.802Q34.846 82.802 34.084 83.120Q33.322 83.438 32.752 84.014Q32.182 84.590 31.870 85.382Q31.558 86.174 31.558 87.110L31.558 87.110Q31.558 88.046 31.870 88.838Q32.182 89.630 32.752 90.206Q33.322 90.782 34.084 91.100Q34.846 91.418 35.746 91.418L35.746 91.418Q36.670 91.418 37.402 91.070Q38.134 90.722 38.650 90.122Q39.166 89.522 39.430 88.748Q39.694 87.974 39.694 87.122L39.694 87.122L35.962 87.122ZM48.350 88.886L48.350 88.886L47.810 89.222Q48.014 89.810 48.386 90.314Q48.758 90.818 49.310 91.118Q49.862 91.418 50.594 91.418L50.594 91.418Q51.110 91.418 51.554 91.256Q51.998 91.094 52.328 90.788Q52.658 90.482 52.844 90.062Q53.030 89.642 53.030 89.126L53.030 89.126Q53.030 88.574 52.838 88.172Q52.646 87.770 52.340 87.482Q52.034 87.194 51.662 87.002Q51.290 86.810 50.942 86.678L50.942 86.678Q50.270 86.438 49.814 86.168Q49.358 85.898 49.130 85.562Q48.902 85.226 48.902 84.758L48.902 84.758Q48.902 84.194 49.298 83.816Q49.694 83.438 50.426 83.438L50.426 83.438Q50.978 83.438 51.350 83.648Q51.722 83.858 51.968 84.170Q52.214 84.482 52.346 84.806L52.346 84.806L52.922 84.482Q52.754 84.074 52.430 83.690Q52.106 83.306 51.620 83.054Q51.134 82.802 50.462 82.802L50.462 82.802Q49.814 82.802 49.298 83.060Q48.782 83.318 48.494 83.780Q48.206 84.242 48.206 84.842L48.206 84.842Q48.206 85.382 48.416 85.766Q48.626 86.150 48.962 86.420Q49.298 86.690 49.688 86.876Q50.078 87.062 50.438 87.194L50.438 87.194Q50.918 87.374 51.356 87.608Q51.794 87.842 52.070 88.214Q52.346 88.586 52.346 89.198L52.346 89.198Q52.346 89.894 51.884 90.344Q51.422 90.794 50.606 90.794L50.606 90.794Q50.006 90.794 49.574 90.536Q49.142 90.278 48.848 89.846Q48.554 89.414 48.350 88.886Z"></path>
+      </svg>
+    </h1>
+
+    <div class="contact">
+      <p class="statement">Skibb Holdings is a real estate platform focused on building and operating housing in <span style="white-space:nowrap">supply-constrained</span> Southern California markets.</p>
+      <div class="rule" aria-hidden="true"></div>
+      <p class="inquiries"><span>Inquiries</span> <a class="email" id="email" href="mailto:info@skibbholdings.com">info@skibbholdings.com</a></p>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <span>© <span id="year">2026</span> Skibb Holdings LLC</span>
+  </footer>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().toLocaleDateString("en-US", { timeZone: "America/Los_Angeles", year: "numeric" });
+</script>
+
+
+
+</body>
+</html>
